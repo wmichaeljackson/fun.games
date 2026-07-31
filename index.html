@@ -7,13 +7,13 @@
   <!-- Collegamento al file Manifest -->
   <link rel="manifest" href="manifest.json">
 
-  <!-- Collegamento per la schermata home del telefono -->
+  <!-- Collegamento all'icona Apple/Android -->
   <link rel="apple-touch-icon" href="logo192.png">
 
-  <!-- NUOVO: Collegamento per la scorciatoia DENTRO Chrome -->
-  <link rel="icon" type="image/png" sizes="192x192" href="logo192.png">
+  <!-- Collegamento per la scorciatoia DENTRO Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="logo192.png?v=1">
 
-  <!-- Colore barra browser opzionale -->
+  <!-- Colore coordinato per la barra del browser -->
   <meta name="theme-color" content="#6dd5fa">
 
   <style>
@@ -25,30 +25,94 @@
   .sec{background:#4caf50;color:#fff}.ter{background:#ff9800;color:#fff}
   footer{margin-top:40px}
   .logo{height:60px;display:block;margin:0 auto 8px;}
+
+  /* --- STILI GRAFICI PER LA BARRA DI CARICAMENTO --- */
+  #preloader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #6dd5fa, #ffb347);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  .loader-title {
+    font-size: 32px;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  .progress-container {
+    width: 250px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+  }
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #ff4081;
+    border-radius: 10px;
+    /* IMPOSTATO A 6 SECONDI */
+    animation: loadFake 6s forwards cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes loadFake {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+  .preloader-hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
   </style>
 </head>
+<body>
 
+<!-- SCHERMATA DI CARICAMENTO GRAFICA -->
+<div id="preloader">
+  <div class="loader-title">Caricamento di fun.games...</div>
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+  </div>
+</div>
 
-<body><div class="box"><img class="logo" alt="fun.games" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMjIwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzNDQ5NWUiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMmVjYzcxIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJwYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZjFjNDBmIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2U2N2UyMiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIyMTgiIGhlaWdodD0iNTgiIHJ4PSIxNiIgZmlsbD0idXJsKCNiZykiLz4KCiAgPCEtLSBnYW1lIGNvbnRyb2xsZXIgaWNvbiAtLT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNCwgMTQpIj4KICAgIDxwYXRoIGQ9Ik02IDE4CiAgICAgICAgICAgICBDNiAxMCAxMiA2IDE4IDYKICAgICAgICAgICAgIEgyNgogICAgICAgICAgICAgQzMyIDYgMzggMTAgMzggMTgKICAgICAgICAgICAgIEMzOCAyNCAzNSAzMCAzMCAzMAogICAgICAgICAgICAgQzI3IDMwIDI2IDI3IDIyIDI3CiAgICAgICAgICAgICBDMTggMjcgMTcgMzAgMTQgMzAKICAgICAgICAgICAgIEM5IDMwIDYgMjQgNiAxOCBaIgogICAgICAgICAgZmlsbD0idXJsKCNwYWQpIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS1vcGFjaXR5PSIwLjI1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgPCEtLSBkLXBhZCAtLT4KICAgIDxyZWN0IHg9IjEyIiB5PSIxNiIgd2lkdGg9IjgiIGhlaWdodD0iMyIgcng9IjEuMiIgZmlsbD0iIzFlMjcyZSIvPgogICAgPHJlY3QgeD0iMTQuNyIgeT0iMTMuMyIgd2lkdGg9IjMiIGhlaWdodD0iOCIgcng9IjEuMiIgZmlsbD0iIzFlMjcyZSIvPgogICAgPCEtLSBidXR0b25zIC0tPgogICAgPGNpcmNsZSBjeD0iMjguNSIgY3k9IjE0LjUiIHI9IjIuNCIgZmlsbD0iIzFlMjcyZSIvPgogICAgPGNpcmNsZSBjeD0iMzIuNSIgY3k9IjE4LjUiIHI9IjIuNCIgZmlsbD0iIzFlMjcyZSIvPgogIDwvZz4KCiAgPCEtLSB3b3JkbWFyayAtLT4KICA8dGV4dCB4PSI1NiIgeT0iMzAiIGZvbnQtZmFtaWx5PSInQ29taWMgU2FucyBNUycsIGN1cnNpdmUsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNmZmZmZmYiPmZ1bjwvdGV4dD4KICA8dGV4dCB4PSI4MyIgeT0iMzAiIGZvbnQtZmFtaWx5PSInQ29taWMgU2FucyBNUycsIGN1cnNpdmUsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiMxZTI3MmUiPi48L3RleHQ+CiAgPHRleHQgeD0iOTAiIHk9IjMwIiBmb250LWZhbWlseT0iJ0NvbWljIFNhbnMgTVMnLCBjdXJzaXZlLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE4IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmZmZmIj5nYW1lczwvdGV4dD4KICA8dGV4dCB4PSI1NiIgeT0iNDUiIGZvbnQtZmFtaWx5PSInQ29taWMgU2FucyBNUycsIGN1cnNpdmUsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOSIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjg1Ij5naW9jYSBhbmNvcmEsIGdpb2NhIG1lZ2xpbzwvdGV4dD4KPC9zdmc+Cg=="/>
+<div class="box"><img class="logo" alt="fun.games" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMjIwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZyIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I=\"/>
 <p>Benvenuto! Divertiti con giochi e progetti simpatici.</p>
-<button class="main" onclick="location.href='https://wmichaeljackson.github.io/stupid-ia-2.0/'">🤖 Stupid IA</button><button class="main" onclick="location.href='https://wmichaeljackson.github.io/il-pulsante-inutile/'">🎮 Il Pulsante Inutile</button><br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/acchiappa-il-Bottone/'">😈 Acchiappa il Bottone</button><div style="margin-top:8px;font-size:16px;color:#555;"><b>🖱️ Per giocare è necessario utilizzare il cursore del mouse.</b></div><br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/segui-il-cerchio/'">🌀 Segui il Cerchio</button><div style="margin-top:8px;font-size:16px;color:#555;"><b>🖱️ Per giocare è necessario utilizzare il cursore del mouse.</b><br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/non-cliccare-la-bomba/'">💣 Non Cliccare la Bomba</button></div>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/scoppia-i-palloncini/'">🎈 Scoppia i Palloncini</button>
+<button class="main" onclick="location.href='https://github.io'">🤖 Stupid IA</button><button class="main" onclick="location.href='https://github.io'">🎮 Il Pulsante Inutile</button><br><button class="main" onclick="location.href='https://github.io'">😈 Acchiappa il Bottone</button><div style="margin-top:8px;font-size:16px;color:#555;"><b>🖱️ Per giocare è necessario utilizzare il cursore del mouse.</b></div><br><button class="main" onclick="location.href='https://github.io'">🌀 Segui il Cerchio</button><div style="margin-top:8px;font-size:16px;color:#555;"><b>🖱️ Per giocare è necessario utilizzare il cursore del mouse.</b><br><button class="main" onclick="location.href='https://github.io'">💣 Non Cliccare la Bomba</button></div>
+<br><button class="main" onclick="location.href='https://github.io'">🎈 Scoppia i Palloncini</button>
 <div style="margin-top:8px;font-size:16px;color:#555;"><b>🖱️ Per giocare è necessario utilizzare il cursore del mouse.</b></div>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/semaforo-impazzito/'">🚦 Semaforo Impazzito</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/trova-il-topolino/'">🐭 Trova il Topolino</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/colpisci-il-bersaglio/'">🎯 Colpisci il Bersaglio</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/memoria-colori/'">🧠 Memoria Colori</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/riflessi-estremi/'">⚡ Riflessi Estremi</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/trova-lintruso/'">🧩 Trova l'Intruso</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/indovina-il-numero/'">🎲 Indovina il Numero</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/schiva-il-traffico/'">🚗 Schiva il Traffico</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/memory-match/'">🃏 Memory Match</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/calcolo-lampo/'">🧮 Calcolo Lampo</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/discesa-libera/'">⛷️ Discesa Libera</button>
-<br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/evita-il-ghiaccio/'">❄️ Evita il Ghiaccio</button>
-  <br><button class="main" onclick="location.href='https://wmichaeljackson.github.io/snake/'">🐍 snake</button>
+<br><button class="main" onclick="location.href='https://github.io'">🚦 Semaforo Impazzito</button>
+<br><button class="main" onclick="location.href='https://github.io'">🐭 Trova il Topolino</button>
+<br><button class="main" onclick="location.href='https://github.io'">🎯 Colpisci il Bersaglio</button>
+<br><button class="main" onclick="location.href='https://github.io'">🧠 Memoria Colori</button>
+<br><button class="main" onclick="location.href='https://github.io'">⚡ Riflessi Estremi</button>
+<br><button class="main" onclick="location.href='https://github.io'">🧩 Trova l'Intruso</button>
+<br><button class="main" onclick="location.href='https://github.io'">🎲 Indovina il Numero</button>
+<br><button class="main" onclick="location.href='https://github.io'">🚗 Schiva il Traffico</button>
+<br><button class="main" onclick="location.href='https://github.io'">🃏 Memory Match</button>
+<br><button class="main" onclick="location.href='https://github.io'">🧮 Calcolo Lampo</button>
+<br><button class="main" onclick="location.href='https://github.io'">⛷️ Discesa Libera</button>
+<br><button class="main" onclick="location.href='https://github.io'">❄️ Evita il Ghiaccio</button>
+  <br><button class="main" onclick="location.href='https://github.io'">🐍 snake</button>
 <div style="margin-top:8px;font-size:16px;color:#555;"><b>🖱️ Per giocare è necessario utilizzare il cursore del mouse.</b></div>
 <footer>
-<button class="sec" onclick="window.open('https://github.com/wmichaeljackson','_blank')">Creatore</button><div><b>wmichaeljackson</b></div>
-<button class="ter" onclick="window.open('https://github.com/wmichaeljackson/fun.games/discussions/1','_blank')">Consigli e Commenti</button>
-</footer></div></body></html>
+<button class="sec" onclick="window.open('https://github.com')">Creatore</button><div><b>wmichaeljackson</b></div>
+<button class="ter" onclick="window.open('https://github.com')">Consigli e Commenti</button>
+</footer></div>
+
+<!-- SCRIPT JAVASCRIPT PER NASCONDERE IL PRELOADER A PAGINA CARICATA -->
+<script>
+  window.addEventListener('load', function() {
+    var preloader = document.getElementById('preloader');
+    // SPARIRE DOPO 6000 MILLISECONDI (6 SECONDI)
+    setTimeout(function() {
+      preloader.classList.add('preloader-hidden');
+    }, 6000); 
+  });
+</script>
+
+</body></html>
